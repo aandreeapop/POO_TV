@@ -3,12 +3,11 @@ package implementation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import input.Input;
 import input.MovieInput;
 import input.UserInput;
 
-public class WriteOutput {
-    public WriteOutput(Input input, ArrayNode output, boolean error) {
+public final class WriteOutput {
+    public WriteOutput(final ArrayNode output, final boolean error) {
         ObjectNode write = output.addObject();
 
         if (error) {
@@ -35,7 +34,8 @@ public class WriteOutput {
         }
     }
 
-    public void movieOutput(MovieInput movie, ObjectNode write) {
+    /** Method that prints the output of a movie in JSON format*/
+    public void movieOutput(final MovieInput movie, final ObjectNode write) {
         write.put("name", movie.getName());
         write.put("year", movie.getYear());
         write.put("duration", movie.getDuration());
@@ -56,10 +56,11 @@ public class WriteOutput {
         write.put("numRatings", movie.getNumRatings());
     }
 
-    public void userOutput(UserInput user, ObjectNode write) {
+    /** Method that prints the output of a user in JSON format*/
+    public void userOutput(final UserInput user, final ObjectNode write) {
         ObjectNode currentUser = write.putObject("currentUser");
         ObjectNode credentials = currentUser.putObject("credentials");
-        credentials.put("name",user.getCredentials().getName());
+        credentials.put("name", user.getCredentials().getName());
         credentials.put("password", user.getCredentials().getPassword());
         credentials.put("accountType", user.getCredentials().getAccountType());
         credentials.put("country", user.getCredentials().getCountry());
@@ -69,7 +70,8 @@ public class WriteOutput {
 
         ArrayNode purchasedMovies = currentUser.putArray("purchasedMovies");
         if (StartNavigation.getStartNavigation().getCurrentUser().getPurchasedMovies() != null) {
-            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getPurchasedMovies()) {
+            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser()
+                    .getPurchasedMovies()) {
                 ObjectNode write2 = purchasedMovies.addObject();
                 movieOutput(movie, write2);
             }
@@ -77,7 +79,8 @@ public class WriteOutput {
 
         ArrayNode watchedMovies = currentUser.putArray("watchedMovies");
         if (StartNavigation.getStartNavigation().getCurrentUser().getWatchedMovies() != null) {
-            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getWatchedMovies()) {
+            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser()
+                    .getWatchedMovies()) {
                 ObjectNode write2 = watchedMovies.addObject();
                 movieOutput(movie, write2);
             }
@@ -85,7 +88,8 @@ public class WriteOutput {
 
         ArrayNode likedMovies = currentUser.putArray("likedMovies");
         if (StartNavigation.getStartNavigation().getCurrentUser().getLikedMovies() != null) {
-            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getLikedMovies()) {
+            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser()
+                    .getLikedMovies()) {
                 ObjectNode write2 = likedMovies.addObject();
                 movieOutput(movie, write2);
             }
@@ -93,7 +97,8 @@ public class WriteOutput {
 
         ArrayNode ratedMovies = currentUser.putArray("ratedMovies");
         if (StartNavigation.getStartNavigation().getCurrentUser().getRatedMovies() != null) {
-            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getRatedMovies()) {
+            for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser()
+                    .getRatedMovies()) {
                 ObjectNode write2 = ratedMovies.addObject();
                 movieOutput(movie, write2);
             }

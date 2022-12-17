@@ -10,11 +10,11 @@ import input.UserInput;
 
 import java.util.ArrayList;
 
-public class Register extends ActionsInput implements Page {
+public final class Register extends ActionsInput implements Page {
     private Input input;
     private ArrayNode output;
 
-   public Register(CredentialsInput credentials, Input input, ArrayNode output) {
+   public Register(final CredentialsInput credentials, final Input input, final ArrayNode output) {
         super(credentials);
         this.input = input;
         this.output = output;
@@ -25,7 +25,8 @@ public class Register extends ActionsInput implements Page {
     public void action() {
         boolean error = false;
         for (int i = 0; i < input.getUsers().size(); i++) {
-            if (this.getCredentials().getName().equals(input.getUsers().get(i).getCredentials().getName())) {
+            if (this.getCredentials().getName().equals(input.getUsers().get(i).getCredentials().
+                    getName())) {
                 error = true;
                 break;
             }
@@ -45,7 +46,7 @@ public class Register extends ActionsInput implements Page {
             StartNavigation.getStartNavigation().setCurrentPage("Homepage neautentificat");
         }
 
-        new WriteOutput(input, output, error);
+        new WriteOutput(output, error);
 
 
 

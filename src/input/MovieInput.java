@@ -20,7 +20,7 @@ public final class MovieInput {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -28,7 +28,7 @@ public final class MovieInput {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(final int year) {
         this.year = year;
     }
 
@@ -36,7 +36,7 @@ public final class MovieInput {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(final int duration) {
         this.duration = duration;
     }
 
@@ -44,7 +44,7 @@ public final class MovieInput {
         return genres;
     }
 
-    public void setGenres(ArrayList<String> genres) {
+    public void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
     }
 
@@ -52,7 +52,7 @@ public final class MovieInput {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    public void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
@@ -64,11 +64,7 @@ public final class MovieInput {
         return ratings;
     }
 
-    public void setRatings(ArrayList<Integer> ratings) {
-        this.ratings = ratings;
-    }
-
-    public void setCountriesBanned(ArrayList<String> countriesBanned) {
+    public void setCountriesBanned(final ArrayList<String> countriesBanned) {
         this.countriesBanned = countriesBanned;
     }
 
@@ -76,7 +72,7 @@ public final class MovieInput {
         return numLikes;
     }
 
-    public void setNumLikes(int numLikes) {
+    public void setNumLikes(final int numLikes) {
         this.numLikes = numLikes;
     }
 
@@ -84,7 +80,7 @@ public final class MovieInput {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(final double rating) {
         this.rating = rating;
     }
 
@@ -92,13 +88,15 @@ public final class MovieInput {
         return numRatings;
     }
 
-    public void setNumRatings(int numRatings) {
+    public void setNumRatings(final int numRatings) {
         this.numRatings = numRatings;
     }
 
+    /** Method that verifies if a movie is already purchased by the current user */
     public boolean isPurchased() {
         boolean isPurchased = false;
-        for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getPurchasedMovies()) {
+        for (MovieInput movie
+                : StartNavigation.getStartNavigation().getCurrentUser().getPurchasedMovies()) {
             if (this.equals(movie)) {
                 isPurchased = true;
                 break;
@@ -107,9 +105,11 @@ public final class MovieInput {
         return isPurchased;
     }
 
+    /** Method that verifies if a movie is already watched by the current user */
     public boolean isWatched() {
         boolean isWatched = false;
-        for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getWatchedMovies()) {
+        for (MovieInput movie
+                : StartNavigation.getStartNavigation().getCurrentUser().getWatchedMovies()) {
             if (this.equals(movie)) {
                 isWatched = true;
                 break;
@@ -118,9 +118,11 @@ public final class MovieInput {
         return isWatched;
     }
 
+    /** Method that verifies if a movie is already liked by the current user */
     public boolean isLiked() {
         boolean isLiked = false;
-        for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getLikedMovies()) {
+        for (MovieInput movie
+                : StartNavigation.getStartNavigation().getCurrentUser().getLikedMovies()) {
             if (this.equals(movie)) {
                 isLiked = true;
                 break;
@@ -129,9 +131,11 @@ public final class MovieInput {
         return isLiked;
     }
 
+    /** Method that verifies if a movie is already rated by the current user */
     public boolean isRated() {
         boolean isRated = false;
-        for (MovieInput movie : StartNavigation.getStartNavigation().getCurrentUser().getRatedMovies()) {
+        for (MovieInput movie
+                : StartNavigation.getStartNavigation().getCurrentUser().getRatedMovies()) {
             if (this.equals(movie)) {
                 isRated = true;
                 break;

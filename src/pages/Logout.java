@@ -4,10 +4,9 @@ import implementation.StartNavigation;
 
 import java.util.ArrayList;
 
-public class Logout implements Page{
-    //private StartNavigation startNavigation;
+public final class Logout implements Page {
 
-    public Logout() {}
+    public Logout() { }
 
     @Override
     public void action() {

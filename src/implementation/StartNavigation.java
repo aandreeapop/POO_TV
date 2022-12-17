@@ -1,20 +1,20 @@
 package implementation;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import input.Input;
 import input.MovieInput;
 import input.UserInput;
 
 import java.util.ArrayList;
 
-public class StartNavigation {
+public final class StartNavigation {
     private String currentPage;
     private ArrayList<MovieInput> currentMoviesList;
     private UserInput currentUser;
 
     private static StartNavigation startNavigation = null;
-    private StartNavigation() {}
+    private StartNavigation() { }
 
+    /** Implemented Singleton Pattern */
     public static StartNavigation getStartNavigation() {
         if (startNavigation == null) {
             startNavigation = new StartNavigation();
@@ -22,7 +22,11 @@ public class StartNavigation {
         return startNavigation;
     }
 
-    public void start (Input input) {
+    /**
+     * Method that starts the navigation on the streaming platform
+     * @param input the input given on tests
+     */
+    public void start(final Input input) {
         this.currentPage = "Homepage neautentificat";
         this.currentMoviesList = new ArrayList<>();
         for (int i = 0; i < input.getUsers().size(); i++) {
@@ -38,7 +42,7 @@ public class StartNavigation {
         return currentPage;
     }
 
-    public void setCurrentPage(String currentPage) {
+    public void setCurrentPage(final String currentPage) {
         this.currentPage = currentPage;
     }
 
@@ -46,7 +50,7 @@ public class StartNavigation {
         return currentMoviesList;
     }
 
-    public void setCurrentMoviesList(ArrayList<MovieInput> currentMoviesList) {
+    public void setCurrentMoviesList(final ArrayList<MovieInput> currentMoviesList) {
         this.currentMoviesList = currentMoviesList;
     }
 
@@ -54,7 +58,7 @@ public class StartNavigation {
         return currentUser;
     }
 
-    public void setCurrentUser(UserInput currentUser) {
+    public void setCurrentUser(final UserInput currentUser) {
         this.currentUser = currentUser;
     }
 }

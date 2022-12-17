@@ -1,39 +1,39 @@
 package pages;
 
 import implementation.StartNavigation;
-import implementation.WriteOutput;
 import input.ActionsInput;
 import input.Filters;
 import input.Input;
 import input.MovieInput;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
-public class Movies extends ActionsInput implements Page {
+public final class Movies extends ActionsInput implements Page {
     private Input input;
 
-    public Movies(Input input) {
+    public Movies(final Input input) {
         this.input = input;
     }
 
-    public Movies(String startsWith, Input input) {
+    public Movies(final String startsWith, final Input input) {
         super(startsWith, null);
         this.input = input;
     }
 
-    public Movies(Filters filters, Input input) {
+    public Movies(final Filters filters, final Input input) {
         super(filters);
         this.input = input;
     }
 
+    /**Method that creates the output for when the pge is changed in 'movies' */
     @Override
     public void action() {
         StartNavigation.getStartNavigation().setCurrentMoviesList(new ArrayList<>());
         for (MovieInput movie : input.getMovies()) {
             boolean isBanned = false;
             for (String country : movie.getCountriesBanned()) {
-                String userCountry = StartNavigation.getStartNavigation().getCurrentUser().getCredentials().getCountry();
+                String userCountry = StartNavigation.getStartNavigation().getCurrentUser().
+                        getCredentials().getCountry();
                 if (userCountry.equals(country)) {
                     isBanned = true;
                     break;
@@ -46,16 +46,20 @@ public class Movies extends ActionsInput implements Page {
         }
     }
 
+    /**Method that searches for a movie*/
     public void search() {
-        for (int i = 0; i < StartNavigation.getStartNavigation().getCurrentMoviesList().size(); i++) {
-            if (!StartNavigation.getStartNavigation().getCurrentMoviesList().get(i).getName().startsWith(getStartsWith())) {
+        for (int i = 0; i < StartNavigation.getStartNavigation().getCurrentMoviesList().size();
+             i++) {
+            if (!StartNavigation.getStartNavigation().getCurrentMoviesList().get(i).getName()
+                    .startsWith(getStartsWith())) {
                 StartNavigation.getStartNavigation().getCurrentMoviesList().remove(i);
                 i--;
             }
         }
     }
 
-    public void filter(ActionsInput action) {
+    /**Method that filters the current movie list*/
+    public void filter(final ActionsInput action) {
         this.action();
         if (action.getFilters().getContains() != null) {
             ArrayList<MovieInput> currentMovieList;

@@ -3,11 +3,11 @@ package pages;
 import implementation.StartNavigation;
 import input.ActionsInput;
 
-public class Upgrades extends ActionsInput implements Page {
-    boolean error;
+public final class Upgrades extends ActionsInput implements Page {
+    private boolean error;
 
-    public Upgrades(){}
-    public Upgrades(int count) {
+    public Upgrades() { }
+    public Upgrades(final int count) {
         super(count, 0);
     }
 
@@ -17,11 +17,15 @@ public class Upgrades extends ActionsInput implements Page {
 
     public void buyTokens() {
         error = false;
-        int balance = StartNavigation.getStartNavigation().getCurrentUser().getCredentials().getBalance();
+        int balance = StartNavigation.getStartNavigation().getCurrentUser()
+                .getCredentials().getBalance();
         if (balance >= this.getCount()) {
-            int tokensCount = StartNavigation.getStartNavigation().getCurrentUser().getTokensCount();
-            StartNavigation.getStartNavigation().getCurrentUser().getCredentials().setBalance(balance - this.getCount());
-            StartNavigation.getStartNavigation().getCurrentUser().setTokensCount(tokensCount + this.getCount());
+            int tokensCount = StartNavigation.getStartNavigation().getCurrentUser()
+                    .getTokensCount();
+            StartNavigation.getStartNavigation().getCurrentUser().getCredentials()
+                    .setBalance(balance - this.getCount());
+            StartNavigation.getStartNavigation().getCurrentUser()
+                    .setTokensCount(tokensCount + this.getCount());
         } else {
             error = true;
         }
@@ -32,7 +36,8 @@ public class Upgrades extends ActionsInput implements Page {
         int tokensCount = StartNavigation.getStartNavigation().getCurrentUser().getTokensCount();
         if (tokensCount >= 10) {
             StartNavigation.getStartNavigation().getCurrentUser().setTokensCount(tokensCount - 10);
-            StartNavigation.getStartNavigation().getCurrentUser().getCredentials().setAccountType("premium");
+            StartNavigation.getStartNavigation().getCurrentUser().getCredentials()
+                    .setAccountType("premium");
         } else {
             error = true;
         }

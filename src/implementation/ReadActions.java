@@ -1,12 +1,12 @@
 package implementation;
 
-import ActionsType.ChangePage;
-import ActionsType.OnPage;
+import actions.ChangePage;
+import actions.OnPage;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import input.Input;
 
 public class ReadActions {
-    public ReadActions(Input input, ArrayNode output, int i) {
+    public ReadActions(final Input input, final ArrayNode output, final int i) {
         switch (input.getActions().get(i).getType()) {
             case "change page" -> {
                new ChangePage(input, output, i);
@@ -15,6 +15,8 @@ public class ReadActions {
             case "on page" -> {
                 new OnPage(input, output, i);
             }
+
+            default -> { }
         }
     }
 }

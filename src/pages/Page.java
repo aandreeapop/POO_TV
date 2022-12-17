@@ -1,5 +1,6 @@
 package pages;
 
 public interface Page {
-    void action ();
+    /**The action done on a page*/
+    void action();
 }

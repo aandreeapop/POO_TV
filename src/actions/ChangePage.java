@@ -1,4 +1,4 @@
-package ActionsType;
+package actions;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import implementation.WriteOutput;
@@ -10,22 +10,25 @@ import pages.SeeDetails;
 
 public class ChangePage {
     private boolean error;
-    public ChangePage(Input input, ArrayNode output, int i) {
+    public ChangePage(final Input input, final ArrayNode output, final int i) {
         error = false;
         String changePageTo = input.getActions().get(i).getPage();
         switch (changePageTo) {
             case "login":
             case "register":
-                if (!StartNavigation.getStartNavigation().getCurrentPage().equals("Homepage neautentificat")) {
+                if (!StartNavigation.getStartNavigation().getCurrentPage()
+                        .equals("Homepage neautentificat")) {
                     error = true;
                 } else {
                     StartNavigation.getStartNavigation().setCurrentPage(changePageTo);
                 }
                 break;
             case "logout":
-                if (StartNavigation.getStartNavigation().getCurrentPage().equals("Homepage neautentificat")
-                    || StartNavigation.getStartNavigation().getCurrentPage().equals("login")
-                    || StartNavigation.getStartNavigation().getCurrentPage().equals("register")) {
+                if (StartNavigation.getStartNavigation().getCurrentPage()
+                        .equals("Homepage neautentificat")
+                        || StartNavigation.getStartNavigation().getCurrentPage().equals("login")
+                        || StartNavigation.getStartNavigation().getCurrentPage()
+                        .equals("register")) {
                     error = true;
                 } else {
                     Logout logout = new Logout();
@@ -33,16 +36,19 @@ public class ChangePage {
                 }
                 break;
             case "movies":
-                if (!StartNavigation.getStartNavigation().getCurrentPage().equals("Homepage autentificat")
-                    && !StartNavigation.getStartNavigation().getCurrentPage().equals("upgrades")
-                    && !StartNavigation.getStartNavigation().getCurrentPage().equals("see details")
-                    && !StartNavigation.getStartNavigation().getCurrentPage().equals("movies")) {
+                if (!StartNavigation.getStartNavigation().getCurrentPage().
+                        equals("Homepage autentificat")
+                        && !StartNavigation.getStartNavigation().getCurrentPage().equals("upgrades")
+                        && !StartNavigation.getStartNavigation().getCurrentPage().
+                        equals("see details")
+                        && !StartNavigation.getStartNavigation().getCurrentPage().
+                        equals("movies")) {
                     error = true;
                 } else {
                     StartNavigation.getStartNavigation().setCurrentPage(changePageTo);
                     Movies movies = new Movies(input);
                     movies.action();
-                    new WriteOutput(input, output, false);
+                    new WriteOutput(output, false);
                 }
                 break;
             case "see details":
@@ -54,21 +60,23 @@ public class ChangePage {
                     if (!seeDetails.isError()) {
                         StartNavigation.getStartNavigation().setCurrentPage(changePageTo);
                     }
-                    new WriteOutput(input, output, seeDetails.isError());
+                    new WriteOutput(output, seeDetails.isError());
                 }
                 break;
             case "upgrades":
                 if (!StartNavigation.getStartNavigation().getCurrentPage().equals("see details")
-                        && !StartNavigation.getStartNavigation().getCurrentPage().equals("Homepage autentificat")) {
+                        && !StartNavigation.getStartNavigation().getCurrentPage().
+                        equals("Homepage autentificat")) {
                     error = true;
                 } else {
                     StartNavigation.getStartNavigation().setCurrentPage(changePageTo);
                 }
                 break;
+            default:
         }
 
-        if(error) {
-            new WriteOutput(input, output, true);
+        if (error) {
+            new WriteOutput(output, true);
         }
 
     }

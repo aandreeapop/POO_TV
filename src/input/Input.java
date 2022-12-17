@@ -7,20 +7,21 @@ public final class Input {
     private ArrayList<MovieInput> movies;
     private ArrayList<ActionsInput> actions;
 
-    public Input(ArrayList<UserInput> users, ArrayList<MovieInput> movies, ArrayList<ActionsInput> actions) {
+    public Input(final ArrayList<UserInput> users, final ArrayList<MovieInput> movies,
+                 final ArrayList<ActionsInput> actions) {
         this.users = users;
         this.movies = movies;
         this.actions = actions;
     }
 
-    public Input(){
+    public Input() {
     }
 
     public ArrayList<UserInput> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<UserInput> users) {
+    public void setUsers(final ArrayList<UserInput> users) {
         this.users = users;
     }
 

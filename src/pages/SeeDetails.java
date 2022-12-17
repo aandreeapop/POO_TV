@@ -6,16 +6,16 @@ import input.MovieInput;
 
 import java.util.ArrayList;
 
-public class SeeDetails extends ActionsInput implements Page {
+public final class SeeDetails extends ActionsInput implements Page {
     private boolean error;
 
-    public SeeDetails(String movie) {
+    public SeeDetails(final String movie) {
         super(null, movie);
     }
 
-    public SeeDetails() {}
+    public SeeDetails() { }
 
-    public SeeDetails (int rate) {
+    public SeeDetails(final int rate) {
         super(0, rate);
     }
 
@@ -37,22 +37,29 @@ public class SeeDetails extends ActionsInput implements Page {
     }
 
     public void purchase() {
-        int numFreePremiumMovies = StartNavigation.getStartNavigation().getCurrentUser().getNumFreePremiumMovies();
-        MovieInput purchasedMovie = StartNavigation.getStartNavigation().getCurrentMoviesList().get(0);
+        int numFreePremiumMovies = StartNavigation.getStartNavigation().getCurrentUser()
+                .getNumFreePremiumMovies();
+        MovieInput purchasedMovie = StartNavigation.getStartNavigation().getCurrentMoviesList()
+                .get(0);
         error = false;
         if (!purchasedMovie.isPurchased()) {
-            if (StartNavigation.getStartNavigation().getCurrentUser().getCredentials().getAccountType()
+            if (StartNavigation.getStartNavigation().getCurrentUser().getCredentials()
+                    .getAccountType()
                     .equals("premium") && numFreePremiumMovies != 0) {
-                StartNavigation.getStartNavigation().getCurrentUser().setNumFreePremiumMovies(numFreePremiumMovies - 1);
+                StartNavigation.getStartNavigation().getCurrentUser()
+                        .setNumFreePremiumMovies(numFreePremiumMovies - 1);
             } else {
-                int tokensCount = StartNavigation.getStartNavigation().getCurrentUser().getTokensCount();
+                int tokensCount = StartNavigation.getStartNavigation().getCurrentUser()
+                        .getTokensCount();
                 if (tokensCount < 2) {
                     error = true;
                 } else {
-                    StartNavigation.getStartNavigation().getCurrentUser().setTokensCount(tokensCount - 2);
+                    StartNavigation.getStartNavigation().getCurrentUser()
+                            .setTokensCount(tokensCount - 2);
                 }
             }
-            StartNavigation.getStartNavigation().getCurrentUser().getPurchasedMovies().add(purchasedMovie);
+            StartNavigation.getStartNavigation().getCurrentUser().getPurchasedMovies()
+                    .add(purchasedMovie);
         } else {
             error = true;
         }
@@ -60,9 +67,11 @@ public class SeeDetails extends ActionsInput implements Page {
 
     public void watch() {
         error = false;
-        MovieInput watchedMovie = StartNavigation.getStartNavigation().getCurrentMoviesList().get(0);
+        MovieInput watchedMovie = StartNavigation.getStartNavigation()
+                .getCurrentMoviesList().get(0);
         if (watchedMovie.isPurchased() && !watchedMovie.isWatched()) {
-            StartNavigation.getStartNavigation().getCurrentUser().getWatchedMovies().add(watchedMovie);
+            StartNavigation.getStartNavigation().getCurrentUser().getWatchedMovies()
+                    .add(watchedMovie);
         } else {
             error = true;
         }
@@ -89,7 +98,7 @@ public class SeeDetails extends ActionsInput implements Page {
             for (int rate : ratedMovie.getRatings()) {
                 rating += rate;
             }
-            ratedMovie.setRating(rating/ratedMovie.getNumRatings());
+            ratedMovie.setRating(rating / ratedMovie.getNumRatings());
             StartNavigation.getStartNavigation().getCurrentUser().getRatedMovies().add(ratedMovie);
         } else {
             error = true;
