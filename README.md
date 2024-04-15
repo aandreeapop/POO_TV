@@ -1,8 +1,7 @@
 
 
-# Proiect - Etapa 1 - POO TV
+# Proiect - POO TV
 ### Name: Pop Andreea 
-### Group: 322CD 
 ### Date: December 2022
 
 ## Implementation
